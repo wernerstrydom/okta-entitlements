@@ -1,3 +1,3 @@
 provider "okta" {
-  base_url  = "okta.com"
+  base_url = "okta.com"
 }
