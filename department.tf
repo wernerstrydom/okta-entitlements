@@ -1,5 +1,5 @@
 locals {
-  teams = {
+  departments = {
     eng = {
       name        = "Engineering"
       description = "Folks who build the good stuff"

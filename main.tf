@@ -1,5 +1,5 @@
-resource "okta_group" "teams" {
-  for_each    = local.teams
+resource "okta_group" "departments" {
+  for_each    = local.departments
   name        = "Department - ${each.value.name}"
   description = each.value.description
 }
@@ -8,11 +8,11 @@ resource "okta_group" "teams" {
 // This simply says that if the department field is set in a user's profile
 // they will be assigned to the right group.
 //
-resource "okta_group_rule" "teams" {
-  for_each          = local.teams
+resource "okta_group_rule" "departments" {
+  for_each          = local.departments
   name              = "Department - ${each.value.name}"
   status            = "ACTIVE"
-  group_assignments = [okta_group.teams[each.key].id]
+  group_assignments = [okta_group.departments[each.key].id]
   expression_value  = "user.department==\"${each.value.name}\""
 }
 
@@ -30,9 +30,15 @@ locals {
   departments_expression = join(" and ", local.department_expression)
 }
 
-resource "okta_group_rule" "invalid_teams" {
-  name              = "Validation - Department"
+resource "okta_group" "invalid_departments" {
+  name        = "Validation - Missing Department"
+  description = "Folks with the wrong department profile field"
+}
+
+
+resource "okta_group_rule" "invalid_departments" {
+  name              = "Validation - Missing Department"
   status            = "ACTIVE"
-  group_assignments = [okta_group.teams[each.key].id]
-  expression_value  = "user.department==\"${each.value.name}\""
+  group_assignments = [okta_group.invalid_departments.id]
+  expression_value  = local.departments_expression
 }
