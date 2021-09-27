@@ -26,9 +26,9 @@ pipeline {
             }
             steps {
                 sh './generate.sh' // Generate backend
-                sh 'tools/terraform -v'
-                sh 'tools/terraform init'
-                sh 'tools/terraform plan'
+                sh 'terraform -v'
+                sh 'terraform init'
+                sh 'terraform plan'
             }
         }
         stage('Promote') {
@@ -49,9 +49,9 @@ pipeline {
             }
             steps {
                 sh './generate.sh'
-                sh 'tools/terraform -v'
-                sh 'tools/terraform init'
-                sh 'tools/terraform apply -auto-approve'
+                sh 'terraform -v'
+                sh 'terraform init'
+                sh 'terraform apply -auto-approve'
             }
         }
         stage('Destroy?') {
@@ -72,9 +72,9 @@ pipeline {
             }
             steps {
                 sh './generate.sh'
-                sh 'tools/terraform -v'
-                sh 'tools/terraform init'
-                sh 'tools/terraform apply -destroy -auto-approve'
+                sh 'terraform -v'
+                sh 'terraform init'
+                sh 'terraform apply -destroy -auto-approve'
             }
         }
     }
