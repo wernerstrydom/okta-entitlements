@@ -25,15 +25,14 @@ pipeline {
                 branch 'main'
             }
             steps {
-                sh './setup.sh'
-                sh './generate.sh'
+                sh './generate.sh' // Generate backend
                 sh 'tools/terraform -v'
                 sh 'tools/terraform init'
                 sh 'tools/terraform plan'
             }
         }
         stage('Promote') {
-            agent any // critical, since we don;t want to block agents
+            agent any // critical, since we don't want to block agents
             when {
                 branch 'main'
             }
@@ -49,7 +48,6 @@ pipeline {
                 branch 'main'
             }
             steps {
-                sh './setup.sh'
                 sh './generate.sh'
                 sh 'tools/terraform -v'
                 sh 'tools/terraform init'
@@ -73,7 +71,6 @@ pipeline {
                 branch 'main'
             }
             steps {
-                sh './setup.sh'
                 sh './generate.sh'
                 sh 'tools/terraform -v'
                 sh 'tools/terraform init'
