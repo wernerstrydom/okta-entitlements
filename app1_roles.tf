@@ -19,7 +19,7 @@ data "okta_group" "app1_admins" {
   name = "AppRole - App1 - Admins"
 }
 
-resource "okta_group_rule" "app1_users" {
+resource "okta_group_rule" "app1_admins" {
   name   = "AppRole - App1 - Admins"
   status = "ACTIVE"
   group_assignments = [
