@@ -21,6 +21,10 @@ resource "okta_group_rule" "departments" {
 // whether the department field is invalid, so someone in people operations
 // can fix it, or if the department name has changed, update the automation.
 //
+// The nice thing about having a group is Okta can notify us when membership
+// changes, so we can either use Okta workflows, Lambda or Azure Functions 
+// to respond to those and make some decisions. 
+//
 locals {
   // Let's create an expression for each department
   department_expression = [
