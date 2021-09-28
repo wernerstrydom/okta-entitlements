@@ -12,5 +12,9 @@ locals {
       name        = "IT"
       description = "Folks who support those who build and sell the good stuff"
     }
+    finance = {
+      name        = "Finance"
+      description = "Folks who pay the bills"
+    }
   }
 }

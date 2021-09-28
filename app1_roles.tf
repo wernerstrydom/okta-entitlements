@@ -15,6 +15,16 @@ data "okta_group" "app1_billing" {
   name = "AppRole - App1 - Billing"
 }
 
+resource "okta_group_rule" "app1_admins" {
+  name   = "AppRole - App1 - Admins"
+  status = "ACTIVE"
+  group_assignments = [
+    data.okta_group.app1_billing.id
+  ]
+  expression_value = "isMemberOfAnyGroup(\"${okta_group.departments["finance"].id}\")"
+}
+
+
 data "okta_group" "app1_admins" {
   name = "AppRole - App1 - Admins"
 }
